@@ -14,7 +14,9 @@ type iSort interface {
 
 type bubble struct{}
 
-func (b bubble) sort(list []int) {
+type selection struct{}
+
+func (bubble) sort(list []int) {
 	for swapped := true; swapped; {
 		swapped = false
 		for i := 0; i < len(list) - 1; i++ {
@@ -22,6 +24,20 @@ func (b bubble) sort(list []int) {
 				list[i], list[i + 1] = list[i + 1], list[i]
 				swapped = true
 			}
+		}
+	}
+}
+
+func (selection) sort(list []int) {
+	for i, v := range list {
+		j := i
+		for k := i + 1; k < len(list); k++ {
+			if list[k] < v {
+				j = k
+			}
+		}
+		if (j != i) {
+			list[j], list[i] = list[i], list[j]
 		}
 	}
 }
@@ -49,7 +65,16 @@ func toInts(strings []string) []int {
 }
 
 func getSorter() iSort {
-	var sorter iSort
-	sorter = bubble{}
-	return sorter
+	if len(os.Args) > 2 {
+		switch os.Args[2] {
+		case "bubble":
+			return bubble{}
+		case "selection":
+			return selection{}
+		default:
+			log.Fatal("unknown sorting algorythm")
+		}
+	}
+
+	return bubble{}
 }
