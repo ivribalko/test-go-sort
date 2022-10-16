@@ -2,6 +2,7 @@ package main
 
 type bubble struct{}
 
+// Keep swapping adjacent until no swaps.
 func (bubble) sort(list []int) {
 	for swapped := true; swapped; {
 		swapped = false

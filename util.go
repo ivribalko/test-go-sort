@@ -5,6 +5,7 @@ import (
 	"strconv"
 )
 
+// Array of strings to array of ints.
 func toInts(strings []string) []int {
 	ints := make([]int, len(strings))
 	for i, v := range strings {

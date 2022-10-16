@@ -2,6 +2,7 @@ package main
 
 type selection struct{}
 
+// For all items find lowest among next item.
 func (selection) sort(list []int) {
 	for i, v := range list {
 		j := i
