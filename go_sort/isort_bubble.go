@@ -3,7 +3,7 @@ package main
 type bubble struct{}
 
 // Keep swapping adjacent until no swaps.
-func (bubble) sort(list []int) {
+func (bubble) sort(list []int) []int {
 	for swapped := true; swapped; {
 		swapped = false
 		for i := 0; i < len(list)-1; i++ {
@@ -13,4 +13,5 @@ func (bubble) sort(list []int) {
 			}
 		}
 	}
+	return list
 }

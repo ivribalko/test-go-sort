@@ -1,33 +1,38 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"log"
-	"os"
 	"strings"
 )
 
 func main() {
-	csv := os.Args[1]
-	strs := strings.Split(csv, ",")
-	ints := toInts(strs)
+	csv := flag.String(
+		"csv",
+		"2,1,3",
+		"comma separated integers")
 
-	getSorter().sort(ints)
+	alg := flag.String(
+		"algorithm",
+		"bubble",
+		"sorting algorithm")
 
-	fmt.Println(ints)
+	flag.Parse()
+
+	fmt.Println(sorter(*alg).sort(sortee(*csv)))
 }
 
-func getSorter() iSort {
-	if len(os.Args) > 2 {
-		switch os.Args[2] {
-		case "bubble":
-			return bubble{}
-		case "selection":
-			return selection{}
-		default:
-			log.Fatal("unknown sorting algorythm")
-		}
-	}
+func sortee(csv string) []int {
+	return toInts(strings.Split(csv, ","))
+}
 
-	return bubble{}
+func sorter(alg string) iSort {
+	switch alg {
+	case "bubble":
+		return bubble{}
+	case "selection":
+		return selection{}
+	default:
+		panic("unknown sorting algorithm")
+	}
 }

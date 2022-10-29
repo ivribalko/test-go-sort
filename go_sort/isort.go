@@ -1,5 +1,5 @@
 package main
 
 type iSort interface {
-	sort([]int)
+	sort([]int)[]int
 }
